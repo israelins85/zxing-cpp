@@ -14,10 +14,10 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-#if defined(__ANDROID__) && defined(__GNUC__)
+#if defined(__ANDROID__) && defined(__GNUC__) && !defined(__clang__)
 
-#include <sstream>
 #include <cstdlib>
+#include <sstream>
 
 namespace std
 {
@@ -27,18 +27,17 @@ namespace std
 		buf << x;
 		return buf.str();
 	}
-	
+
 	template <typename T>
 	inline std::wstring to_wstring(T x) {
 		std::wstringstream buf;
 		buf << x;
 		return buf.str();
 	}
-	
+
 	inline int stoi(const std::string& s) {
 		return atoi(s.c_str());
 	}
 }
-
 
 #endif
