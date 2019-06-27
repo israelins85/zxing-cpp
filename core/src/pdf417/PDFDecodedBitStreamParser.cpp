@@ -29,6 +29,8 @@
 
 #include <array>
 #include <cassert>
+#include <stdint.h>
+#include "../string-utils.h"
 
 namespace ZXing {
 namespace Pdf417 {
@@ -609,25 +611,25 @@ DecodeStatus DecodeMacroBlock(const std::vector<int>& codewords, int codeIndex, 
 					case MACRO_PDF417_OPTIONAL_FIELD_SEGMENT_COUNT: {
 						std::string segmentCount;
 						status = NumericCompaction(codewords, codeIndex + 1, segmentCount, codeIndex);
-						resultMetadata.setSegmentCount(std::stoi(segmentCount));
+                        resultMetadata.setSegmentCount(ustl::stoi(segmentCount));
 						break;
 					}
 					case MACRO_PDF417_OPTIONAL_FIELD_TIME_STAMP: {
 						std::string timestamp;
 						status = NumericCompaction(codewords, codeIndex + 1, timestamp, codeIndex);
-						resultMetadata.setTimestamp(std::stoll(timestamp));
+                        resultMetadata.setTimestamp(ustl::stoll(timestamp));
 						break;
 					}
 					case MACRO_PDF417_OPTIONAL_FIELD_CHECKSUM: {
 						std::string checksum;
 						status = NumericCompaction(codewords, codeIndex + 1, checksum, codeIndex);
-						resultMetadata.setChecksum(std::stoi(checksum));
+                        resultMetadata.setChecksum(ustl::stoi(checksum));
 						break;
 					}
 					case MACRO_PDF417_OPTIONAL_FIELD_FILE_SIZE: {
 						std::string fileSize;
 						status = NumericCompaction(codewords, codeIndex + 1, fileSize, codeIndex);
-						resultMetadata.setFileSize(std::stoll(fileSize));
+                        resultMetadata.setFileSize(ustl::stoll(fileSize));
 						break;
 					}
 					default: {
